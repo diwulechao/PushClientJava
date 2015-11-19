@@ -47,6 +47,8 @@ public class JavaApplication1 {
             if (s != null) {
                 System.out.println(s);
                 try {
+                    s = s.substring(s.indexOf('|') + 1);
+
                     switch (s) {
                         case "on":
                             pin.high();
@@ -59,7 +61,8 @@ public class JavaApplication1 {
                             break;
                         default:
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                }
             }
         }
     }
