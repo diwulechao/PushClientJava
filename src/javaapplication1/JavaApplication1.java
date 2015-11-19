@@ -44,6 +44,7 @@ public class JavaApplication1 {
 
     public static String excutePost(String targetURL, String urlParameters) {
         HttpURLConnection connection = null;
+        lasterrortime = System.currentTimeMillis();
         try {
             //Create connection
             URL url = new URL(targetURL);
@@ -76,9 +77,9 @@ public class JavaApplication1 {
                 response.append('\r');
             }
             rd.close();
+            lasterrortime = 0;
             return response.toString();
         } catch (Exception e) {
-            lasterrortime = System.currentTimeMillis();
             return e.getMessage();
         } finally {
             if (connection != null) {
