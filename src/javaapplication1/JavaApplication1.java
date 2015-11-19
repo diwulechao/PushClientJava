@@ -34,8 +34,6 @@ public class JavaApplication1 {
         final GpioController gpio = GpioFactory.getInstance();
         final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "MyLED", PinState.HIGH);
         pin.setShutdownOptions(true, PinState.LOW);
-        
-        Thread.sleep(5000);
 
         while (true) {
             if (System.currentTimeMillis() - lasterrortime < 5000) {
@@ -49,18 +47,21 @@ public class JavaApplication1 {
             if (s != null) {
                 System.out.println(s);
                 try {
-                    s = s.substring(s.indexOf('|') + 1);
-                    if (s.equals("on")) {
-                        pin.high();
-                        System.out.println("set Pin High");
-                    }
-                    else if (s.equals("off")) {
-                        pin.low();
-                        System.out.println("set Pin Low");
-                    }
-                    else if (s.equals("toggle")) {
-                        pin.toggle();
-                        System.out.println("set Pin Toggle");
+                    s = s.trim().substring(s.indexOf('|') + 1);
+                    switch (s) {
+                        case "on":
+                            pin.high();
+                            System.out.println("set Pin High");
+                            break;
+                        case "off":
+                            pin.low();
+                            System.out.println("set Pin Low");
+                            break;
+                        case "toggle":
+                            pin.toggle();
+                            System.out.println("set Pin Toggle");
+                            break;
+                        default:
                     }
                 } catch (Exception e) {
                 }
