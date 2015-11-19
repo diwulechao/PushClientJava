@@ -36,9 +36,9 @@ public class JavaApplication1 {
         pin.setShutdownOptions(true, PinState.LOW);
 
         while (true) {
-            if (System.currentTimeMillis() - lasterrortime < 3000) {
+            if (System.currentTimeMillis() - lasterrortime < 1000) {
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException ex) {
                 }
             }
@@ -87,6 +87,7 @@ public class JavaApplication1 {
             connection.setUseCaches(false);
             connection.setDoOutput(true);
             connection.setReadTimeout(30000);
+            connection.setConnectTimeout(1000);
 
             //Send request
             DataOutputStream wr = new DataOutputStream(
