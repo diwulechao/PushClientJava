@@ -50,17 +50,17 @@ public class JavaApplication1 {
                 System.out.println(s);
                 try {
                     s = s.substring(s.indexOf('|') + 1);
-                    switch (s) {
-                        case "on":
-                            pin.high();
-                            break;
-                        case "off":
-                            pin.low();
-                            break;
-                        case "toggle":
-                            pin.toggle();
-                            break;
-                        default:
+                    if (s.equals("on")) {
+                        pin.high();
+                        System.out.println("set Pin High");
+                    }
+                    else if (s.equals("off")) {
+                        pin.low();
+                        System.out.println("set Pin Low");
+                    }
+                    else if (s.equals("toggle")) {
+                        pin.toggle();
+                        System.out.println("set Pin Toggle");
                     }
                 } catch (Exception e) {
                 }
