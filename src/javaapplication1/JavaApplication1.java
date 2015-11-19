@@ -30,10 +30,12 @@ public class JavaApplication1 {
      */
     public static long lasterrortime;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         final GpioController gpio = GpioFactory.getInstance();
-        final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "MyLED", PinState.LOW);
+        final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "MyLED", PinState.HIGH);
         pin.setShutdownOptions(true, PinState.LOW);
+        
+        Thread.sleep(5000);
 
         while (true) {
             if (System.currentTimeMillis() - lasterrortime < 5000) {
@@ -45,10 +47,9 @@ public class JavaApplication1 {
 
             String s = excutePost("http://hacktestd.cloudapp.net:1802", "iot1|no|1");
             if (s != null) {
-                
+                System.out.println(s);
                 try {
                     s = s.substring(s.indexOf('|') + 1);
-                    System.out.println(s);
                     switch (s) {
                         case "on":
                             pin.high();
